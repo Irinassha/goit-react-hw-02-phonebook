@@ -1,8 +1,15 @@
+import s from './Filter.module.css';
+
 export const Filter = ({ filter, filterName }) => {
   return (
-    <div>
-      <h3>Find contact by name</h3>
-      <input type="text" name="filter" value={filter} onChange={filterName}></input>
+    <div className={s.filter}>
+      <input
+        className={s.filterInput}
+        type="text"
+        name="filter"
+        value={filter}
+        onChange={filterName}
+      ></input>
     </div>
   );
 };
