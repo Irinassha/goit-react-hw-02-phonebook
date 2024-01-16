@@ -46,10 +46,6 @@ export class App extends React.Component {
       return alert(`${option.name} is already in contacts`);
     }
 
-    if (option.name === '' || option.number === '') {
-      return alert('Please fill in all fields');
-    }
-
     return this.setState(prevState => ({
       contacts: [...this.state.contacts, newObject],
     }));
@@ -58,9 +54,7 @@ export class App extends React.Component {
   render() {
     const filterContacts = this.getFilteredData();
     const { filter, contacts } = this.state;
-    const deleteContact = this.handlerDeleteContact;
-    const filterName = this.handlerFilterName;
-    const addNameNumber = this.handlerAddNameNumber;
+
     return (
       <div
         style={{
@@ -72,16 +66,15 @@ export class App extends React.Component {
         }}
       >
         <h1>Phonebook</h1>
-        <ContactForm contacts={contacts} addNameNumber={addNameNumber} />
+        <ContactForm contacts={contacts} addNameNumber={this.handlerAddNameNumber} />
         <h2>Find contact by name</h2>
         <Filter
           filter={filter}
-          filterName={filterName}
-          contactsFind={filterContacts}
+          filterName={this.handlerFilterName}
         />
         <ContactList
           contacts={filterContacts}
-          onLeaveFeedback={deleteContact}
+          onLeaveFeedback={this.handlerDeleteContact}
         />
       </div>
     );

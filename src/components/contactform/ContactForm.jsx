@@ -6,17 +6,16 @@ export class ContactForm extends React.Component {
     number: '',
   };
 
-  hendlerChangeName = e => {
-    this.setState({ name: e.target.value });
-  };
-
-  hendlerCgangeNumber = e => {
-    const numberValue = e.target.value;
-    const inputNumber = numberValue.replace(/[^0-9+]/, '');
-    if (numberValue !== inputNumber) {
-      return alert('Please use numbers only');
+  hendlerChange = e => {
+    const { name, value } = e.target;
+    const inputNumber = value.replace(/[^0-9+]/, '');
+    if (name === 'number') {
+      this.setState({ [name]: inputNumber });
     }
-    this.setState({ number: numberValue });
+    if (name === 'number' && value !== inputNumber) {
+      alert('Please use numbers only');
+    }
+    this.setState({ [name]: value });
   };
 
   handlerAdd = () => {
@@ -25,12 +24,13 @@ export class ContactForm extends React.Component {
       name: '',
       number: '',
     }));
+     if (this.state.name === '' || this.state.number === '') {
+       return alert('Please fill in all fields');
+     }
   };
 
   render() {
     const { name, number } = this.state;
-    const nameAdd = this.hendlerChangeName;
-    const numberAdd = this.hendlerCgangeNumber;
     return (
       <form className={s.form}>
         <div className={s.formInput}>
@@ -42,7 +42,7 @@ export class ContactForm extends React.Component {
             required
             placeholder="Enter your name"
             value={name}
-            onChange={nameAdd}
+            onChange={this.hendlerChange}
           />
         </div>
         <div className={s.formInput}>
@@ -54,7 +54,7 @@ export class ContactForm extends React.Component {
             required
             placeholder="Enter your phone number"
             value={number}
-            onChange={numberAdd}
+            onChange={this.hendlerChange}
           />
         </div>
         <button className={s.formBtn} type="button" onClick={this.handlerAdd}>
