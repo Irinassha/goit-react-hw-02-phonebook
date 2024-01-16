@@ -32,18 +32,19 @@ export class App extends React.Component {
   };
 
   handlerAddNameNumber = option => {
+    const {name, number} = option
     const newObject = {
       id: nanoid(),
-      name: option.name,
-      number: option.number,
+      name: name,
+      number: number,
     };
 
     const isExist = this.state.contacts.find(
-      item => item.name.toLowerCase() === option.name.toLowerCase()
+      item => item.name.toLowerCase() === name.toLowerCase()
     );
 
     if (isExist) {
-      return alert(`${option.name} is already in contacts`);
+      return alert(`${name} is already in contacts`);
     }
 
     return this.setState(prevState => ({
