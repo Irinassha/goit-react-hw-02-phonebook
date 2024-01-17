@@ -19,14 +19,14 @@ export class ContactForm extends React.Component {
   };
 
   handlerAdd = () => {
+    if (this.state.name === '' || this.state.number === '') {
+      return alert('Please fill in all fields');
+    }
     this.props.addNameNumber(this.state);
     this.setState(prevState => ({
       name: '',
       number: '',
     }));
-     if (this.state.name === '' || this.state.number === '') {
-       return alert('Please fill in all fields');
-     }
   };
 
   render() {

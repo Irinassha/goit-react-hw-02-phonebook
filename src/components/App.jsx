@@ -46,8 +46,8 @@ export class App extends React.Component {
     if (isExist) {
       return alert(`${name} is already in contacts`);
     }
-
-    return this.setState(prevState => ({
+    
+    this.setState(prevState => ({
       contacts: [...this.state.contacts, newObject],
     }));
   };
